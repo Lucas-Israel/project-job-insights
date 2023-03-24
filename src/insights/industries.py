@@ -1,3 +1,7 @@
+if __name__ == "__main__":
+    from jobs import read
+else:
+    from src.insights.jobs import read
 from typing import List, Dict
 
 
@@ -16,7 +20,9 @@ def get_unique_industries(path: str) -> List[str]:
     list
         List of unique industries
     """
-    raise NotImplementedError
+    read_result = read(path)
+    set = {info["industry"] for info in read_result if info["industry"]}
+    return sorted([value for value in set])
 
 
 def filter_by_industry(jobs: List[Dict], industry: str) -> List[Dict]:
@@ -34,4 +40,8 @@ def filter_by_industry(jobs: List[Dict], industry: str) -> List[Dict]:
     list
         List of jobs with provided industry
     """
-    raise NotImplementedError
+    result = jobs
+    to_return = [
+        dict for dict in result if dict["industry"].upper() == industry.upper()
+    ]
+    return to_return
