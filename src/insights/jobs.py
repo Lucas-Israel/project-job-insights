@@ -2,8 +2,6 @@ from functools import lru_cache
 from typing import List, Dict
 import csv
 
-# test
-
 
 @lru_cache
 def read(path: str) -> List[Dict]:
